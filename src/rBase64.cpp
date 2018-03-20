@@ -159,4 +159,4 @@ inline unsigned char b64_lookup(char c) {
 }
 
 /* Declaring the Main Class Instance */
-rBASE64generic<80> rbase64;
+rBASE64generic<RBASE64_MAX_DEFAULT_SIZE> rbase64;

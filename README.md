@@ -102,7 +102,7 @@ Here is the List of the OO Function in `rbase64` object:
 
   - `size_t rbase64.encode(uint8_t *data, size_t length)` - For Direct byte Stream
 
-  - `size_t rbase64.encode(const char *data)` - For NULL Terminated character Array as shown in the **Example Below**
+  - `size_t rbase64.encode(const char *data)` - For NULL Terminated character Array as shown in the [**Example 1**](https://github.com/boseji/rBASE64#example-1--using-the-standard-object)
   
   - `size_t rbase64.encode(String text)` - String containing the source
   
@@ -110,11 +110,11 @@ Function to Convert into BASE64 encoded string else returns the Error Codes deta
 
   - `size_t rbase64.decode(uint8_t *data, size_t length)` - For Direct byte Stream
   
-  - `size_t rbase64::decode(const char *data)` - For NULL Terminated character Array as shown in the **Example Below**
+  - `size_t rbase64::decode(const char *data)` - For NULL Terminated character Array as shown in the [**Example 1**](https://github.com/boseji/rBASE64#example-1--using-the-standard-object)
   
   - `size_t rbase64::decode(String text)` - String containing the source
   
-Function to Convert from BASE64 encoded string else returns the Error Codes detailed below
+Function to Convert from BASE64 encoded string else returns the [Error Codes](https://github.com/boseji/rBASE64#error-codes) detailed below
 
 The Result for all the above conversion function is received by:
   

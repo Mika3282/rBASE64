@@ -14,7 +14,8 @@
 // @brief 
 // Library to provide the BASE64 conversion and vis-versa
 //
-// @version API 1.0.0
+// @version API 1.1.0 - Adding Generics 20th Mar 2018
+// @version API 1.0.0 - Initial API
 //
 //
 // @author boseji - salearj@hotmail.com
@@ -157,106 +158,5 @@ inline unsigned char b64_lookup(char c) {
   return -1;
 }
 
-/**
- * Function to Encode the Byte Array to a BASE64 encoded String
- *
- * @param data Pointer to the Source Buffer
- * @param length Source Buffer Length
- *
- * @return Encoded String else the '-FAIL-' string in case of Error
- */
-String rBASE64::encode(uint8_t *data, size_t length)
-{
-  size_t o_length = rbase64_enc_len(length);
-  String s = "-FAIL-";
-  // Check Size
-  if(o_length < 128)
-  {
-    s.reserve(o_length);
-
-    /* Make sure that the Length is Ok for the Output */
-    if(o_length == rbase64_encode(buf,(char *)data,length))
-    {
-      s = String(buf);
-    }
-  }
-  return s;
-}
-
-/**
- * Function to Encode the Byte Array to a BASE64 encoded String
- *
- * @param data Pointer to the Source Buffer
- * @waring This function assumes that the Input String is a NULL terminated buffer
- *
- * @return Encoded String else the '-FAIL-' string in case of Error
- */
-String rBASE64::encode(char *data)
-{
-  return rBASE64::encode((uint8_t *)data, strlen(data));
-}
-
-/**
- * Function to Encode the Byte Array to a BASE64 encoded String
- *
- * @param text String containing the Source Buffer
- *
- * @return Encoded String else the '-FAIL-' string in case of Error
- */
-String rBASE64::encode(String text)
-{
-  return rBASE64::encode((uint8_t *) text.c_str(), text.length());
-}
-
-/**
- * Function to Decode the Byte Array with BASE64 encoded String to Normal String
- *
- * @param data Pointer to the Source Buffer
- * @param length Source Buffer Length
- *
- * @return Decoded String else the '-FAIL-' string in case of Error
- */
-String rBASE64::decode(uint8_t *data, size_t length)
-{
-  size_t o_length = rbase64_dec_len((char *)data, length);
-  String s = "-FAIL-";
-
-  // Check Size
-  if(o_length < 128)
-  {
-    /* Make sure that the Length is Ok for the Output */
-    if(o_length == rbase64_decode(buf,(char *)data,length))
-    {
-      s = String(buf);
-    }
-  }
-  return s;
-}
-
-/**
- * Function to Decode the Byte Array with BASE64 encoded String to Normal String
- *
- * @param data Pointer to the Source Buffer
- * @waring This function assumes that the Input String is a NULL terminated buffer
- *
- * @return Decoded String else the '-FAIL-' string in case of Error
- */
-String rBASE64::decode(char *data)
-{
-  return rBASE64::decode((uint8_t *)data, strlen(data));
-}
-
-/**
- * Function to Decode the Byte Array with BASE64 encoded String to Normal String
- *
- * @param text String containing the Source Buffer
- *
- * @return Decoded String else the '-FAIL-' string in case of Error
- */
- String rBASE64::decode(String text)
-{
-  return rBASE64::decode((uint8_t *) text.c_str(), text.length());
-}
-        
 /* Declaring the Main Class Instance */
-rBASE64 rbase64;
+rBASE64generic<80> rbase64;

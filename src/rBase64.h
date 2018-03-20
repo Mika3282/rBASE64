@@ -18,7 +18,8 @@
 // This is based on the prior work done by Markus Sattler for ESP8266 BASE64
 // implementation and Per Ejeklint for ArduinoWebsocketServer project
 //
-// @version API 1.0.0
+// @version API 1.1.0 - Adding Generics 20th Mar 2018
+// @version API 1.0.0 - Initial API
 //
 //
 // @author boseji - salearj@hotmail.com
@@ -111,20 +112,8 @@ size_t rbase64_enc_len(size_t inputLen);
 size_t rbase64_dec_len(char *input, size_t inputLen);
 
 /*
-  Base 64 Class for Implementing the bidirectional transactions on BASE64
- */
-class rBASE64 {
-    public:
-        String encode(uint8_t *data, size_t length);
-        String encode(char *data);
-        String encode(String text);
-        String decode(uint8_t *data, size_t length);
-        String decode(char *data);
-        String decode(String text);
-};
-
-/*
- Base 64 Generic class to support Arbitrary size Encoding and Decoding of BASE64
+ Base 64 Generic Storage class to support Arbitrary size 
+ Encoding and Decoding of BASE64
  - sz parameter determines the Plain Text Size that is possible
 */
 template<size_t sz>
@@ -140,37 +129,96 @@ class rBASE64generic {
 	
 	public:
 	/**
-	 * Function to Encode a Array of fixed length to a Base64 String
+	 * Function to Encode a Byte Array of fixed length to a Base64 String
+	 *
+	 * @param data Pointer to the Source Buffer
+	 * @param length Source Buffer Length
+	 *
+	 * @return Encoded String else the '-FAIL-' string in case of Error
+	 *         - Additionally the Error codes are added internally and can
+	 *         be fetched using @ref getLastError() function.
+	 *
 	 */
-	String encode(uint8_t *data, size_t length);
+	String encode(uint8_t *data, size_t length) {
+	  size_t o_length = rbase64_enc_len(length);
+	  String s = "-FAIL-";
+	  // Default We assume there can only be Size Error
+	  error = RABSE64_STATUS_SIZE;
+	  // Check Size
+	  if(o_length <= MAX_BUF_SIZE)
+	  {
+		/* Make sure that the Length is Ok for the Output */
+		if(o_length == rbase64_encode((char *)buf,(char *)data,length))
+		{
+		  s.reserve(o_length);
+		  s = String((char *)buf);
+		  error = RBASE64_STATUS_OK;
+		} 
+	  }
+	  return s;
+	}
 	/**
 	 * Function to Encode a NULL terminated Array to a Base64 String
 	 */
-	String encode(char *data);
+	String encode(const char *data) {
+		return encode((uint8_t *)data, strlen(data));
+	}
 	/**
 	 * Function to Encode String to a Base64 String
 	 */
-	String encode(String text);
+	String encode(String text) {
+		return encode((uint8_t *) text.c_str(), text.length());
+	}
 	/**
-	 * Function to Decode a Array of fixed length containing BASE64 
-	 * to a normal String
+	 * Function to Decode the Byte Array with BASE64 encoded String to Normal String
+	 *
+	 * @param data Pointer to the Source Buffer
+	 * @param length Source Buffer Length
+	 *
+	 * @return Decoded String else the '-FAIL-' string in case of Error
+	 *         - Additionally the Error codes are added internally and can
+	 *         be fetched using @ref getLastError() function.
 	 */
-	String decode(uint8_t *data, size_t length);
+	String decode(uint8_t *data, size_t length) {
+		size_t o_length = rbase64_dec_len((char *)data, length);
+		String s = "-FAIL-";
+		// Default We assume there can only be Size Error
+		error = RABSE64_STATUS_SIZE;
+
+		// Check Size
+		if(o_length <= MAX_BUF_SIZE)
+		{
+			/* Make sure that the Length is Ok for the Output */
+			if(o_length == rbase64_decode((char *)buf,(char *)data,length))
+			{
+			  s.reserve(o_length);
+			  s = String((char *)buf);
+			}
+		}
+		return s;
+	}
 	/**
 	 * Function to Decode a Null terminated Array containing BASE64 
 	 * to a normal String
 	 */
-	String decode(char *data);
+	String decode(const char *data) {
+		return decode((uint8_t *)data, strlen(data));
+	}
 	/**
 	 * Function to Decode a String containing BASE64 to a normal String
 	 */
-	String decode(String text);
+	String decode(String text) {
+		return decode((uint8_t *) text.c_str(), text.length());
+	}
+	
 	/**
 	 * Function to report the Last error that occurred
 	 */
-	size_t getLastError(void);
+	size_t getLastError(void) {
+		return error;
+	}
 };
 
-extern rBASE64 rbase64;
+extern rBASE64generic<80> rbase64;
 
 #endif // _RBASE64_H

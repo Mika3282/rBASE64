@@ -120,6 +120,16 @@ The Result for all the above conversion function is received by:
   
   - `char * rbase64.result()`
 
+### Error Codes
+
+  - `RBASE64_STATUS_OK = 0` - If Every thing is alright.
+
+  - `RABSE64_STATUS_SIZE = 1` - If there is buffer size overflow detected
+
+### Macro
+
+  - `RBASE64_ENC_SIZECALC(x)` this can be used to calculate the Constant size of array needed to store the string of size `x`
+
 
 ## Dependencies
  WString Library

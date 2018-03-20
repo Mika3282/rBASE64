@@ -11,7 +11,7 @@
   Copyright 2016 - Under creative commons license 3.0:
         Attribution-ShareAlike CC BY-SA
 
-  @version API 1.0.0
+  @version API 1.1.0
   @author boseji - salearj@hotmail.com
 
 */
@@ -23,8 +23,14 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(rbase64.encode("Hello There, I am doing Good."));
-  Serial.println(rbase64.decode("SGVsbG8gVGhlcmUsIEkgYW0gZG9pbmcgR29vZC4="));
+  if (rbase64.encode("Hello There, I am doing Good.") == RBASE64_STATUS_OK) {
+    Serial.println("\nConverted the String to Base64 : ");
+    Serial.println(rbase64.result());
+  }
+
+  if (rbase64.decode("SGVsbG8gVGhlcmUsIEkgYW0gZG9pbmcgR29vZC4=") == RBASE64_STATUS_OK ) {
+    Serial.println("\nConverted the String from Base64 : ");
+    Serial.println(rbase64.result());
+  }
   delay(2000);
 }
-

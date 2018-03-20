@@ -15,6 +15,7 @@
 // Library to provide the BASE64 conversion and vis-versa
 //
 // @version API 1.1.0 - Adding Generics 20th Mar 2018
+//                (Breaking Backward Compatibility due to Memory constrains)
 // @version API 1.0.0 - Initial API
 //
 //
@@ -159,4 +160,4 @@ inline unsigned char b64_lookup(char c) {
 }
 
 /* Declaring the Main Class Instance */
-rBASE64generic<RBASE64_MAX_DEFAULT_SIZE> rbase64;
+rBase64generic<RBASE64_MAX_DEFAULT_SIZE> rbase64;

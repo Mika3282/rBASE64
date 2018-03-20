@@ -1,4 +1,4 @@
-= rBASE64 Library for Arduino =
+# rBASE64 Library for Arduino
 
 Real Base64 library is a speed optimized flexible implementations of BASE64
 Encoding and Decoding logic.
@@ -47,7 +47,7 @@ Function to Convert into BASE64 encoded string else returns the string `"-FAIL"`
 Function to Convert back from BASE64 encoding else returns the string `"-FAIL"`
 
 
-== Example ==
+## Example
 
 ```arduino
 #include <rBase64.h>
@@ -64,7 +64,7 @@ void loop() {
 ```
 
 
-=== Tip : How to test base64 in Python ===
+## Tip : How to test base64 in Python
 
 At the Python terminal prompt (get this by executing `python.exe` on *Windows* or `python` on *Linux* terminal) :
 
@@ -80,26 +80,26 @@ At the Python terminal prompt (get this by executing `python.exe` on *Windows* o
 This way one can also verify other strings.
 
 
-=== Dependencies ===
+## Dependencies
  WString Library
  Thread Safe: No
  Extendable: Yes
 
 
-=== Limitations ===
+## Limitations
 
-==== OO Implementation Limits:
-  - Can't take Encodeing strings more than "70 Characters".
+### OO Implementation Limits:
+  - Can't take Encoding strings more than "70 Characters".
   - Can't Decode the BASE64 strings beyond "100 Characters".
   - Memory usage is approximately 280Bytes in RAM.
 
-==== The Native Implementation has no such Limiations.
+### The Native Implementation has no such Limitations.
 
 For more information about this library please view the code at
 http://github.com/boseji/rBASE64
 
 
-== License ==
+## License
 
 Released Under creative commons license 3.0: Attribution-ShareAlike CC BY-SA
 

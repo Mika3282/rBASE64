@@ -7,9 +7,9 @@ There are native as well as object oriented functions.
 
 ## Example 1 : Using the Standard Object
 
-***NOTE: Read the [Limitations](Limitations) Carefully ***
+***NOTE: Read the [Limitations](https://github.com/boseji/rBASE64#limitations) Carefully***
 
-```arduino
+```c
 #include <rBase64.h>
 
 void setup() {
@@ -32,7 +32,7 @@ void loop() {
 
 ## Example 2 : Using the Generic Class to create a special instance
 
-```arduino
+```c
 #include <rBase64.h>
 
 rBase64generic<250> mybase64;

@@ -27,6 +27,18 @@
 #ifndef _RBASE64_H
 #define _RBASE64_H
 
+// Function to Calculate the Encoding Length from plain text length
+#define RBASE64_ENC_SIZECALC(X) ((X + 2 - ((X + 2) % 3)) / 3 * 4)
+
+// Error Code for All is Fine
+#define RBASE64_STATUS_OK 0
+
+// Error Code for Insufficient size or decoded size error.
+#define RABSE64_STATUS_SIZE 1
+
+// Error caused due to Invalid format
+#define RBASE64_STATUS_FORMAT 2
+
 /* b64_alphabet:
  *      Description: Base64 alphabet table, a mapping between integers
  *                   and base64 digits
@@ -109,6 +121,54 @@ class rBASE64 {
         String decode(uint8_t *data, size_t length);
         String decode(char *data);
         String decode(String text);
+};
+
+/*
+ Base 64 Generic class to support Arbitrary size Encoding and Decoding of BASE64
+ - sz parameter determines the Plain Text Size that is possible
+*/
+template<size_t sz>
+class rBASE64generic {
+	
+	private:
+	// Internal Variable to store the Size of encoding buffer
+	size_t MAX_BUF_SIZE = RBASE64_ENC_SIZECALC(sz);
+	// Internal Buffer for Encoding and Decoding
+	uint8_t buf[RBASE64_ENC_SIZECALC(sz)];
+	// Error Storage
+	size_t error;
+	
+	public:
+	/**
+	 * Function to Encode a Array of fixed length to a Base64 String
+	 */
+	String encode(uint8_t *data, size_t length);
+	/**
+	 * Function to Encode a NULL terminated Array to a Base64 String
+	 */
+	String encode(char *data);
+	/**
+	 * Function to Encode String to a Base64 String
+	 */
+	String encode(String text);
+	/**
+	 * Function to Decode a Array of fixed length containing BASE64 
+	 * to a normal String
+	 */
+	String decode(uint8_t *data, size_t length);
+	/**
+	 * Function to Decode a Null terminated Array containing BASE64 
+	 * to a normal String
+	 */
+	String decode(char *data);
+	/**
+	 * Function to Decode a String containing BASE64 to a normal String
+	 */
+	String decode(String text);
+	/**
+	 * Function to report the Last error that occurred
+	 */
+	size_t getLastError(void);
 };
 
 extern rBASE64 rbase64;

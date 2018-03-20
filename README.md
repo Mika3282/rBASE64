@@ -96,7 +96,7 @@ the converted original string from BASE64
 
 ### OO Default Implementation
 
-*Note: * The default implementation uses the `rBase64generic<100>`.
+*Note:* The default implementation uses the `rBase64generic<100>`.
 
 Here is the List of the OO Function in `rbase64` object:
 

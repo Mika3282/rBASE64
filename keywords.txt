@@ -6,8 +6,8 @@
 # Datatypes (KEYWORD1)
 ###########################################
 
-rbase64	KEYWORD1	rbase64
-rBase64generic	KEYWORD1	rBase64generic
+rbase64	KEYWORD1
+rBase64generic	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)

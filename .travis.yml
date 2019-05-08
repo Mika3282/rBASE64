@@ -1,0 +1,17 @@
+language: c++
+sudo: false
+before_install:
+  - source <(curl -SLs https://raw.githubusercontent.com/Marzogh/Travis-CI/master/install.sh)
+script:
+  #- build_main_platforms
+  - build_platform uno
+  - build_platform due
+  - build_platform zero
+  - build_platform esp8266
+  - build_platform esp32
+  - build_platform leonardo
+  - build_platform mega2560
+notifications:
+  email:
+    on_success: change
+    on_failure: change

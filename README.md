@@ -1,5 +1,7 @@
 # rBASE64 Library for Arduino
 
+![Build Status](https://travis-ci.org/boseji/rBASE64.svg?branch=master)
+
 Real Base64 library is a speed optimized flexible implementations of BASE64
 Encoding and Decoding logic.
 

@@ -1,8 +1,8 @@
 language: c++
 sudo: false
 before_install:
-  - source <(curl -SLs https://github.com/boseji/Travis-CI-arduino/raw/master/install.sh)
   - export ARDUINO_IDE_VERSION="1.8.10"
+  - source <(curl -SLs https://github.com/boseji/Travis-CI-arduino/raw/master/install.sh)
 script:
   - build_main_platforms  
 notifications:

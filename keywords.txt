@@ -8,6 +8,7 @@
 
 rbase64	KEYWORD1
 rBase64generic	KEYWORD1
+rBase64	KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
